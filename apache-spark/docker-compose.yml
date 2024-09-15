@@ -1,0 +1,36 @@
+version: "3.1"
+
+services:
+  # apache spark master server where the jobs will be submitted
+  apache-spark-master:
+
+    # container details
+    container_name: spark-master
+    image: bitnami/spark:latest
+
+    # environment for the master node
+    environment:
+      - SPARK_MODE=master
+    
+    # ports configuration
+    ports:
+      - "8080:8080"   # Web UI
+      - "7077:7077"   # Master
+      - "18080:18080" # history server
+
+    # running as a root user
+    user: root
+    
+    # default command to be executed
+    command: ["start-history-server.sh"]
+    
+    # volume configuration
+    volumes:
+      - "./app.jar:/opt/bitnami/spark/app.jar"
+      - "spark-events:/opt/bitnami/spark/tmp/spark-events"
+      - "./spark-default.conf:/opt/bitnami/spark/conf/spark-defaults.conf"
+      - "./spark-default.conf:/opt/bitnami/spark/conf.default/spark-defaults.conf"
+    
+
+volumes:
+  spark-events:

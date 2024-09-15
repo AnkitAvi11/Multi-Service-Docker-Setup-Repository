@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: mysql-Deployment
+  labels:
+   type: database
+   tier: backend-database
+
+spec:
+  replicas: 1
+  selector: 
+    type: database
+    tier: backend-database
+  
+  template: 
+    metadata:
+      name: mysql-database
+      labels:
+        type: database
+        tier: backend-database
+    
+    spec:
+      containers:
+        - name: mysql-database
+          image: mysql:5.7.17
+
+          ports:
+            - containerPort: 3306
+          
+          resources:
+            limits:
+              cpu: "512Mi"              
+              memory: "512m"
+          
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
+            - name: MYSQL_DATABASE
+              value: hortonworks
+            - name: MYSQL_USER
+              value: hortonworks
+            - name: MYSQL_PASSWORD
+              value: password

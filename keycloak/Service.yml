@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: keycloak-service
+  labels:
+    type: load-balancer-service
+    tier: backend
+
+spec:
+  ports:
+    - port: 8080  # service port
+      targetPort: 8080  # port the application is running on
+
+      # Un-comment if using a node port service
+      # nodePort: 30005
+
+  # selector is used for matching the pods with the provided labels
+  selector:
+    - tier: backend

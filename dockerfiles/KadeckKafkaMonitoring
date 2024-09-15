@@ -1,0 +1,1 @@
+docker run -d -e xeotek_kadeck_free="<your_email_address>" -e xeotek_kadeck_port=80 -p 80:80 --name kadeck -v kadeck_data:/root/.kadeck/ xeotek/kadeck:5.2.3

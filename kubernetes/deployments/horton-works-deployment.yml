@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: horton-works-deployment
+  labels:
+    type: schema-registry-service
+    tier: backend
+
+spec:
+  replicas: 1
+
+  selector:
+    type: schema-registry-service
+    tier: backend
+  
+  template:
+    # metadata about the schema registry
+    metadata:
+      name: schema-registry-service
+      labels:
+        type: schema-registry-service
+        tier: backend
+    
+    # specification for the pods
+    spec:
+      containers:
+        - name: schema-registry-service
+          image: thebookpeople/hortonworks-registry:latest
+
+          resources:
+            limits:
+              cpu: "256m"
+              memory: "256Mi"
+
+          env:
+            - name: DB_NAME
+              password: hortonworks
+            - name: DB_USER
+              password: hortonworks
+            - name: DB_PASSWORD
+              value: password
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_HOST
+              value: database 

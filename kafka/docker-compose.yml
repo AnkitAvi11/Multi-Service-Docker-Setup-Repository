@@ -1,0 +1,13 @@
+version: "3.1"
+
+services:
+  # starts an apache kafka server container
+  apache-kafka:
+    image: apache/kafka:latest
+    container_name: apache-kafka
+
+    ports:
+      - 9092:9092
+    
+    volumes:
+      - ./kafka_data:/opt/data/kafka-data

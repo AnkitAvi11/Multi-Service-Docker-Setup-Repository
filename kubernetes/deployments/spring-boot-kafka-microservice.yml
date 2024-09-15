@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: spring-boot-kafka
+  labels:
+    version: "1.0"
+    type: microservice
+    tier: backend
+
+spec:
+  replicas: 3
+  template:
+    # template for the pod configurations
+    metadata:
+      name: spring-boot-kafka-microservice-pod
+      labels:
+        version: "1.0"
+        type: microservice-pod
+        tier: backend
+
+    # specification for the pods
+    spec:
+      containers:
+        - name: spring-boot-kafka-microservice-pod
+          image: ankitavi11/spring-boot-kafka:1.0
+
+          resources:
+            limits:
+              cpu: "256m"
+              memory: "256Mi"
+
+          # exposing the ports
+          ports:
+            - containerPort: 8080
+          
+          # liveness probe
+
+          # readiness probe
+
+          # startup probe
+
+  # selector configuration for the pods
+  selector:
+    matchLabels:
+      version: "1.0"
+      type: microservice-pod
+      tier: backend

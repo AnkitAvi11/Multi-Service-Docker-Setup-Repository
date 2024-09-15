@@ -1,0 +1,19 @@
+version: "3.1"
+
+services:
+  confluent-schema-registry:
+    container_name: schema-registry-container
+    image: bitnami/schema-registry:latest
+
+    ports:
+      - "8081:8081"
+      - "8082:8082"
+
+    environment:
+      - SCHEMA_REGISTRY_DEBUG=true
+
+    volumes:
+      - schema_registry_data:/opt/data/schema_registry
+
+volumes:
+  schema_registry_data:

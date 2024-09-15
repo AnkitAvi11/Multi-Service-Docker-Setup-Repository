@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="app">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/apache-spark/app.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
